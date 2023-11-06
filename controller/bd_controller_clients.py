@@ -525,7 +525,7 @@ class DatabaseControllerClient():
             Bookings,
             Email,
             Password
-            ) VALUES (%s, %s, %s, %s )""",
+            ) VALUES (%s, %s, %s, %s, %s )""",
             (
             row[1], 
             row[2], 
@@ -547,13 +547,13 @@ class DatabaseControllerClient():
             Bookings,
             Email,
             Password
-            ) VALUES (%s, %s, %s, %s )""",
+            ) VALUES (%s, %s, %s, %s, %s )""",
             (
             row[1], 
             row[2], 
             row[3], 
             row[4], 
-            row[5],
+            row[5]
             ))
             cursor.execute("""DELETE FROM railway.premium_client WHERE id = %s""", (row[0],))
             connection.commit()
@@ -565,7 +565,8 @@ class DatabaseControllerClient():
             "id" : i[0],
             "name": i[1],
             "contact": i[2],
-            "Description": i[3],
+            "Bookings": i[3],
+            "Email" : i[4]
             }
             rowsj.append(rowj)
     
