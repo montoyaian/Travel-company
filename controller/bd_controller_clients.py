@@ -1,4 +1,4 @@
-from Classes.standart_client import Standardclient
+from Classes.standard_client import Standardclient
 from Classes.premium_client import PremiumClient
 from Classes.offers import Offer
 from Classes.Admins import Admins
@@ -24,7 +24,7 @@ class DatabaseControllerClient():
         SECRET_KEY = "travelcompany123456789"
         ALGORITHM = "HS256"
         ACCESS_TOKEN_EXPIRE_MINUTES = 800 
-        cursor.execute('SELECT * FROM railway.standart_client')
+        cursor.execute('SELECT * FROM railway.standard_client')
         rows = cursor.fetchall()
         data = jsonable_encoder(login_item)
         for i in rows:
@@ -53,7 +53,7 @@ class DatabaseControllerClient():
         cursor = connection.cursor()
        
         if isinstance(client,Standardclient):
-            cursor.execute('''INSERT INTO railway.standart_client(
+            cursor.execute('''INSERT INTO railway.standard_client(
             Name,
             Contact,
             Bookings,
@@ -104,9 +104,9 @@ class DatabaseControllerClient():
     def insert_offer(self, offer:Offer):
         connection = mysql.connector.connect(user='root',password='@73tubgixjy4e0qo1uqaw@9k7rvvm_nt',host='monorail.proxy.rlwy.net',database='railway',port='42203')
         cursor = connection.cursor()
-        if offer.flight_type == "standart class":
+        if offer.flight_type == "standard class":
             cursor.execute(
-            """SELECT * FROM railway.standart_class WHERE id = %s""",
+            """SELECT * FROM railway.standard_class WHERE id = %s""",
             (offer.id_flight,),
             )
             result = cursor.fetchone()
@@ -174,7 +174,7 @@ class DatabaseControllerClient():
         cursor = connection.cursor()
         if isinstance(client, Standardclient):
             cursor.execute(
-            """SELECT * FROM railway.standart_client WHERE id = %s""",
+            """SELECT * FROM railway.standard_client WHERE id = %s""",
             (client.id,),
         )
             result = cursor.fetchone()
@@ -243,9 +243,9 @@ class DatabaseControllerClient():
         )
         result = cursor.fetchone()
         if result:
-            if offer.flight_type == "standart class":
+            if offer.flight_type == "standard class":
                 cursor.execute(
-                """SELECT * FROM railway.standart_class WHERE id = %s""",
+                """SELECT * FROM railway.standard_class WHERE id = %s""",
                 (offer.id_flight,),
                 )
                 result = cursor.fetchone()
@@ -328,13 +328,13 @@ class DatabaseControllerClient():
                 cursor.execute("""SELECT * FROM railway.bookings WHERE Id_client = %s AND Type_client = 'premium client' """,(id,))
                 rows = cursor.fetchall()
                 for  booking in rows:  
-                    if booking[4] == "standart class":
-                        cursor.execute("""SELECT * FROM railway.standart_class WHERE ID= %s""", (booking[2],))
+                    if booking[4] == "standard class":
+                        cursor.execute("""SELECT * FROM railway.standard_class WHERE ID= %s""", (booking[2],))
                         flight = cursor.fetchone()
                         flight_new_position = flight[4] + booking[1]
 
                         cursor.execute(
-                        """UPDATE railway.standart_class SET
+                        """UPDATE railway.standard_class SET
                         Positions=%s
                         WHERE id = %s""",
                         (
@@ -364,21 +364,21 @@ class DatabaseControllerClient():
             else:
                 return{"error":"cliente no encontrado"}
                             
-        elif (client_type == "standart client"):
-            cursor.execute("""SELECT * FROM railway.standart_client WHERE ID = %s """,(id,))
+        elif (client_type == "standard client"):
+            cursor.execute("""SELECT * FROM railway.standard_client WHERE ID = %s """,(id,))
             result = cursor.fetchone()
             if result:
-                cursor.execute("""DELETE FROM railway.standart_client WHERE id = %s""", (id,))
+                cursor.execute("""DELETE FROM railway.standard_client WHERE id = %s""", (id,))
                 connection.commit()
-                cursor.execute("""SELECT * FROM railway.bookings WHERE Id_client = %s AND Type_client = 'standart client' """,(id,))
+                cursor.execute("""SELECT * FROM railway.bookings WHERE Id_client = %s AND Type_client = 'standard client' """,(id,))
                 rows = cursor.fetchall()
                 for  booking in rows:  
-                    if booking[4] == "standart class":
-                        cursor.execute("""SELECT * FROM railway.standart_class WHERE ID= %s""", (booking[2],))
+                    if booking[4] == "standard class":
+                        cursor.execute("""SELECT * FROM railway.standard_class WHERE ID= %s""", (booking[2],))
                         flight = cursor.fetchone()
                         flight_new_position = flight[4] + booking[1]
                         cursor.execute(
-                        """UPDATE railway.standart_class SET
+                        """UPDATE railway.standard_class SET
                         Positions=%s
                         WHERE id = %s""",
                         (
@@ -401,7 +401,7 @@ class DatabaseControllerClient():
                         ),
                         )
                         connection.commit()
-                cursor.execute("""DELETE FROM railway.bookings  WHERE Id_client = %s AND Type_client = 'standart client'""", (id,))
+                cursor.execute("""DELETE FROM railway.bookings  WHERE Id_client = %s AND Type_client = 'standard client'""", (id,))
                 connection.commit()
                 
                 return DELETE_SUCCESS
@@ -434,7 +434,7 @@ class DatabaseControllerClient():
         cursor = connection.cursor()
         try:
             if table_name == "all":
-                cursor.execute('SELECT * FROM railway.standart_client')
+                cursor.execute('SELECT * FROM railway.standard_client')
                 rows = cursor.fetchall()
                 cursor.execute('SELECT * FROM railway.premium_client')
                 rows += cursor.fetchall()
@@ -526,7 +526,7 @@ class DatabaseControllerClient():
         connection = mysql.connector.connect(user='root',password='@73tubgixjy4e0qo1uqaw@9k7rvvm_nt',host='monorail.proxy.rlwy.net',database='railway',port='42203')
         cursor = connection.cursor()
         cursor.execute(
-        """SELECT * FROM railway.standart_client WHERE Bookings >= %s""",
+        """SELECT * FROM railway.standard_client WHERE Bookings >= %s""",
         (4,),
         )
         for row in cursor.fetchall():
@@ -545,7 +545,7 @@ class DatabaseControllerClient():
             row[4], 
             row[5]
             ))
-            cursor.execute("""DELETE FROM railway.standart_client WHERE id = %s""", (row[0],))
+            cursor.execute("""DELETE FROM railway.standard_client WHERE id = %s""", (row[0],))
             connection.commit()
         cursor.execute(
         """SELECT * FROM railway.premium_client WHERE Bookings  < %s""",
@@ -553,7 +553,7 @@ class DatabaseControllerClient():
         )
         for row in cursor.fetchall():
             cursor.execute(
-            """INSERT INTO  railway.standart_client(
+            """INSERT INTO  railway.standard_client(
             Name,
             Contact,
             Bookings,

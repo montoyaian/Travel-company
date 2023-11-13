@@ -1,8 +1,8 @@
-from Classes.standart_client import Standardclient
+from Classes.standard_client import Standardclient
 from Classes.premium_client import PremiumClient
 from fastapi import APIRouter, Depends, HTTPException
 from controller.bd_controller_clients import DatabaseControllerClient
-from models.standart_client_model import *
+from models.standard_client_model import *
 from models.premium_client_model import *
 from models.client_model import *
 
@@ -13,12 +13,12 @@ client_router = APIRouter(
     tags=["Clients"],
 )
 
-@client_router.post("/add/standartclient")
-async def add_standartclient(standart_client : Standart_clientmodel):
+@client_router.post("/add/standardclient")
+async def add_standardclient(standard_client : Standard_clientmodel):
     """
-    Add a standart client to database
+    Add a standard client to database
     """
-    return bd_object_client.insert_client(Standardclient(id =0, name=standart_client.name, contact= standart_client.contact,bookings = standart_client.bookings ,email= standart_client.email, password = standart_client.password))
+    return bd_object_client.insert_client(Standardclient(id =0, name=standard_client.name, contact= standard_client.contact,bookings = standard_client.bookings ,email= standard_client.email, password = standard_client.password))
 
 
 
@@ -29,12 +29,12 @@ async def add_premiumclient(premium_client : Premium_clientmodel):
     """
     return bd_object_client.insert_client(PremiumClient(id =0, name= premium_client.name, contact= premium_client.contact,bookings = premium_client.bookings ,email= premium_client.email,password = premium_client.password))
 
-@client_router.put("/edit/standartclient/{client_id}")
-def edit_client(client_id, standart_client : Standart_clientUpdateModel):
+@client_router.put("/edit/standardclient/{client_id}")
+def edit_client(client_id, standard_client : Standard_clientUpdateModel):
     """
-    edit a standart client to database
+    edit a standard client to database
     """ 
-    return bd_object_client.edit_client(Standardclient(id = client_id, name=standart_client.name, contact= standart_client.contact,bookings = standart_client.bookings ,email= standart_client.email,password = standart_client.password))
+    return bd_object_client.edit_client(Standardclient(id = client_id, name=standard_client.name, contact= standard_client.contact,bookings = standard_client.bookings ,email= standard_client.email,password = standard_client.password))
 
 @client_router.put("/edit/premiumclient/{client_id}")
 def edit_client(client_id, premium_client : Premium_clientmodel):
@@ -51,7 +51,7 @@ def delete_client(id:int = 1 , client_type:str = "client type"):
     return bd_object_client.delete_client(id= id, client_type=client_type)
 
 @client_router.get("/get/clients/{id}/{table_name}")
-def show_client(id:str = "all or id", table_name:str = "standart_client or premium_client"):
+def show_client(id:str = "all or id", table_name:str = "standard_client or premium_client"):
     """
      show clients
     """ 
