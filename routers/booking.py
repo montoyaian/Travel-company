@@ -41,10 +41,10 @@ def show_bookings(id:str = "all or id"):
     """ 
     return bd_object_booking.show_booking(id=id)
 
-@bookings_router.get("/get/bill")
-def show_bill(id_booking:int = 1,payment_method:str = "payment_method"):
+@bookings_router.post("/get/bill/{id_booking}")
+def show_bill(id_booking, bill: Billmodel):
     """
     show bill
     """ 
-    return bd_object_booking.show_bill(id_booking=id_booking,payment_method=payment_method)
+    return bd_object_booking.show_bill(id_booking=id_booking,payment_method=bill.payment_method)
 

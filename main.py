@@ -6,7 +6,7 @@ from routers.offers import offers_router
 from routers.fligh import flight_router
 from routers.booking import bookings_router
 from models.client_model import *
-from controller.bd_controller_clients import DatabaseControllerClient
+from controller.db_controller_clients import DatabaseControllerClient
 
 app = FastAPI(title="Travel company API")
 bd_object_client = DatabaseControllerClient() 

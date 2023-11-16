@@ -16,3 +16,8 @@ class BookingUpdateModel (BaseModel):
     cant_positions:Optional[int]
     class Config:
         from_attributes = True
+
+class Billmodel (BaseModel):
+    payment_method: Optional[str]
+    class Config:
+        from_attributes = True
