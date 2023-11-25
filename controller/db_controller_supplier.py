@@ -126,7 +126,7 @@ class DatabaseControllerSupplier():
         for i in rows:
             rowj ={
             "id" : i[0],
-            "name": i[1],,
+            "name": i[1]
             }
             rowsj.append(rowj)
 
