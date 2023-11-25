@@ -122,5 +122,12 @@ class DatabaseControllerSupplier():
         cursor.execute(
             '''SELECT * FROM railway.supplier''')
         rows = cursor.fetchall()
-        return rows
-        
+        rowsj = []
+        for i in rows:
+            rowj ={
+            "id" : i[0],
+            "name": i[1],,
+            }
+            rowsj.append(rowj)
+
+        return rowsj
