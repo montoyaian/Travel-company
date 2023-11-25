@@ -170,8 +170,27 @@ class DatabaseControllerBokings():
                         new_cost_position,
                         )) 
                         connection.commit()  
+                        cursor.execute("""
+                        SELECT * FROM railway.bookings 
+                        WHERE Cant_positions = %s AND 
+                            Id_flight = %s AND 
+                            Id_client = %s AND 
+                            Type_flight = %s AND 
+                            Type_client = %s AND 
+                            Cost_position = %s""",
+                        (
+                            booking.cant_positions,
+                            booking.id_flight,
+                            booking.id_client,
+                            booking.type_flight,
+                            booking.type_client,
+                            new_cost_position,
+                        )
+                        )
+                        rowbooking = cursor.fetchone()
                         if discount == 0:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
@@ -181,6 +200,7 @@ class DatabaseControllerBokings():
                             }     
                         else:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
@@ -254,8 +274,27 @@ class DatabaseControllerBokings():
                         new_cost_position,
                         ))   
                         connection.commit()
+                        cursor.execute("""
+                        SELECT * FROM railway.bookings 
+                        WHERE Cant_positions = %s AND 
+                            Id_flight = %s AND 
+                            Id_client = %s AND 
+                            Type_flight = %s AND 
+                            Type_client = %s AND 
+                            Cost_position = %s""",
+                        (
+                            booking.cant_positions,
+                            booking.id_flight,
+                            booking.id_client,
+                            booking.type_flight,
+                            booking.type_client,
+                            new_cost_position,
+                        )
+                        )
+                        rowbooking = cursor.fetchone()
                         if discount == 0:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
@@ -265,6 +304,7 @@ class DatabaseControllerBokings():
                             }     
                         else:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
@@ -329,9 +369,28 @@ class DatabaseControllerBokings():
                         booking.type_client,
                         new_cost_position,
                         ))
-                        connection.commit()                        
+                        connection.commit()   
+                        cursor.execute("""
+                        SELECT * FROM railway.bookings 
+                        WHERE Cant_positions = %s AND 
+                            Id_flight = %s AND 
+                            Id_client = %s AND 
+                            Type_flight = %s AND 
+                            Type_client = %s AND 
+                            Cost_position = %s""",
+                        (
+                            booking.cant_positions,
+                            booking.id_flight,
+                            booking.id_client,
+                            booking.type_flight,
+                            booking.type_client,
+                            new_cost_position,
+                        )
+                        )
+                        rowbooking = cursor.fetchone()
                         if discount == 0:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
@@ -341,6 +400,7 @@ class DatabaseControllerBokings():
                             }     
                         else:
                             bookingj = {
+                            "id": rowbooking[0],
                             "cant_position":booking.cant_positions,
                             "Id_flight": booking.id_flight,
                             "Id_client": booking.id_client,
