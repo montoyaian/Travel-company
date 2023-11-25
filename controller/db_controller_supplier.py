@@ -117,17 +117,10 @@ class DatabaseControllerSupplier():
             except:
                 {"message" : "datos no validos"}   
     def show_supplier_name(self):
-        connection = mysql.connector.connect(user='root',password='@73tubgixjy4e0qo1uqaw@9k7rvvm_nt',host='monorail.proxy.rlwy.net',database='railway',port='42203')
+        connection = mysql.connector.connect(user='root',password='chDh466Ec1f4aFg31b1Fd-3f1H4FG3gF',host='viaduct.proxy.rlwy.net',database='railway',port='40559')
         cursor = connection.cursor()
         cursor.execute(
-        '''SELECT id, name FROM railway.supplier''')
+            '''SELECT * FROM railway.supplier''')
         rows = cursor.fetchall()
-        rowsj=[]
-        for i in rows:
-            rowj ={
-            "id" : i[0],
-            "name": i[1],
-            }
-            rowsj.append(rowj)
-
-        return rowsj
+        return rows
+        
