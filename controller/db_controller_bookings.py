@@ -667,19 +667,33 @@ class DatabaseControllerBokings():
                     Customer_type = %s """, (booking[1],booking[3]))
         offer = cursor.fetchone() 
         if booking:
-            total_cost = booking[6] * booking[1]
-            bill = Bill(id_booking, total_cost, id_booking, payment_method)
-            billj = {
-            "id": bill.id,
-            "total_price": bill.total_price,
-            "id_booking": bill.id_booking,
-            "payment_method": bill.payment_method,
-            "cant_positions" : booking[1],
-            "id_flight" : booking[2],
-            "type_flight" : booking[4],
-            "offer": offer[0],
-            "discount" : offer[2]
-            }
-            return  billj
+            if offer:
+                total_cost = booking[6] * booking[1]
+                bill = Bill(id_booking, total_cost, id_booking, payment_method)
+                billj = {
+                "id": bill.id,
+                "total_price": bill.total_price,
+                "id_booking": bill.id_booking,
+                "payment_method": bill.payment_method,
+                "cant_positions" : booking[1],
+                "id_flight" : booking[2],
+                "type_flight" : booking[4],
+                "offer": offer[0],
+                "discount" : offer[2]
+                }
+                return  billj
+            else:
+                total_cost = booking[6] * booking[1]
+                bill = Bill(id_booking, total_cost, id_booking, payment_method)
+                billj = {
+                "id": bill.id,
+                "total_price": bill.total_price,
+                "id_booking": bill.id_booking,
+                "payment_method": bill.payment_method,
+                "cant_positions" : booking[1],
+                "id_flight" : booking[2],
+                "type_flight" : booking[4],
+                }
+                return  billj
         else:
             return {"error": "Reserva no encontrada"}
