@@ -664,7 +664,7 @@ class DatabaseControllerBokings():
         cursor.execute("""SELECT * FROM railway.bookings WHERE ID= %s""", (id_booking,))
         booking = cursor.fetchone() 
         cursor.execute("""SELECT * FROM railway.Offers WHERE Id_flight= %s AND 
-                    Customer_type = %s """, (booking.id_flight,booking.customer_type))
+                    Customer_type = %s """, (booking[1],booking[3]))
         offer = cursor.fetchone() 
         if booking:
             total_cost = booking[6] * booking[1]
