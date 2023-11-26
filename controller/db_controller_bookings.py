@@ -30,7 +30,6 @@ class DatabaseControllerBokings():
                     else:
                         discount = float(offer[2])
                     cursor.execute("""SELECT * FROM railway.standard_client WHERE id= %s""", (booking.id_client,),)
-                    print(booking.id_client)
                     client = cursor.fetchone()
                     if client:                      
                         price_position = flight[7]
@@ -101,6 +100,8 @@ class DatabaseControllerBokings():
                             "Type_flight": booking.type_flight,
                             "Type_client": booking.type_client,
                             "Cost_position": new_cost_position,
+                            "offer" : 0,
+                            "discount" : 0
                             }     
                         else:
                             bookingj = {
@@ -197,6 +198,8 @@ class DatabaseControllerBokings():
                             "Type_flight": booking.type_flight,
                             "Type_client": booking.type_client,
                             "Cost_position": new_cost_position,
+                            "offer" : 0,
+                            "discount" : 0    
                             }     
                         else:
                             bookingj = {
@@ -301,6 +304,8 @@ class DatabaseControllerBokings():
                             "Type_flight": booking.type_flight,
                             "Type_client": booking.type_client,
                             "Cost_position": new_cost_position,
+                            "offer" : 0,
+                            "discount" : 0  
                             }     
                         else:
                             bookingj = {
@@ -397,6 +402,8 @@ class DatabaseControllerBokings():
                             "Type_flight": booking.type_flight,
                             "Type_client": booking.type_client,
                             "Cost_position": new_cost_position,
+                            "offer" : 0,
+                            "discount" : 0  
                             }     
                         else:
                             bookingj = {
