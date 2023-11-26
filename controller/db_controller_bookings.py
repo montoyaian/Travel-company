@@ -663,7 +663,9 @@ class DatabaseControllerBokings():
         cursor = connection.cursor()
         cursor.execute("""SELECT * FROM railway.bookings WHERE ID= %s""", (id_booking,))
         booking = cursor.fetchone() 
-
+        cursor.execute("""SELECT * FROM railway.Offers WHERE Id_flight= %s AND 
+                    Customer_type = %s """, (booking.id_flight,booking.customer_type))
+        offer = cursor.fetchone() 
         if booking:
             total_cost = booking[6] * booking[1]
             bill = Bill(id_booking, total_cost, id_booking, payment_method)
@@ -674,7 +676,9 @@ class DatabaseControllerBokings():
             "payment_method": bill.payment_method,
             "cant_positions" : booking[1],
             "id_flight" : booking[2],
-            "type_flight" : booking[4]
+            "type_flight" : booking[4],
+            "offer": offer[0],
+            "discount" : offer[2]
             }
             return  billj
         else:
