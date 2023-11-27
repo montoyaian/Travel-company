@@ -111,7 +111,7 @@ class DatabaseControllerClient():
         )
             result = cursor.fetchone()
             if result:
-                cursor.execute("""UPDATE railway.premium_client SET 
+                cursor.execute("""UPDATE railway.standard_client SET 
                 Name = %s,
                 Contact = %s,
                 Email = %s,
@@ -129,7 +129,6 @@ class DatabaseControllerClient():
                 clientj = {
                 "name": client.name,
                 "contact": client.contact,
-
                 "email": client.email,
                 }
                 return clientj
